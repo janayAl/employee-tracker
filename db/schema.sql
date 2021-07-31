@@ -22,10 +22,10 @@ ON DELETE SET NULL
 CREATE TABLE employee (
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 first_name VARCHAR(30),
-last_name VARCHAR(30),  
-role_id INT FOREIGN KEY REFERENCES role(id),
-manager_id INT FOREIGN KEY REFERENCES employee(id)
-ON DELETE SET NULL
+last_name VARCHAR(30),
+role_id int not null,
+manager_id int null,
+FOREIGN key (role_id) REFERENCES role(id),
+Foreign key (manager_id) References employee(id) on DELETE set null
 );
-
 
