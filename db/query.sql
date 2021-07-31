@@ -1,7 +1,7 @@
 SELECT department.name, role.title, role.salary, employee.first_name, employee.last_name, employee.manager_id
 FROM department
-INNER JOIN role ON role.role_id = department.id
-INNER JOIN employee ON role.salry = employee.id
+LEFT JOIN role ON role.role_id = department.id
+LEFT JOIN employee ON role.salry = employee.id
 ORDER BY department.name ASC;
 
 
