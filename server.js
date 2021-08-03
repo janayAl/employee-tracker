@@ -49,7 +49,7 @@ app.post('/api/new_department', ({ body }, res) => {
 });
 
 // Read all departments
-app.get('/api/departments', (req, res) => {
+app.get('/api/department', (req, res) => {
   const sql = `SELECT id, department_name AS department_name FROM departments`;
   
   db.query(sql, (err, rows) => {
@@ -85,8 +85,8 @@ app.post('/api/new_role', ({ body }, res) => {
   
 
   //Read a new Role
-//   app.get('/api/roles', (req, res) => {
-//     const sql = `SELECT id, roles_title AS roles_name FROM roles`;
+//   app.get('/api/role', (req, res) => {
+//     const sql = `SELECT id, role_title AS roles_name FROM roles`;
     
 //     db.query(sql, (err, rows) => {
 //       if (err) {
