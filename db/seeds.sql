@@ -1,8 +1,8 @@
 USE employees_db;
-INSERT INTO department (name)
-VALUES ('Air'),
-       ('Water'),
-       ('Earth');
+INSERT INTO department (id, name)
+VALUES ('1', 'Air'),
+       ('2', 'Water'),
+       ('3', 'Earth');
 
        INSERT INTO role (title, salary)
 VALUES ('Bird', '500000'),
