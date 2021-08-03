@@ -1,7 +1,38 @@
-const express = require ('express')
-const mysql = require ('mysql')
-const mysql2 = require ('mysql2')
+const express = require('express')
+const mysql = require('mysql')
+const mysql2 = require('mysql2')
+const Connection = require('mysql2/typings/mysql/lib/Connection')
 
+//add view department function
+
+function viewrole() {
+    Connection.createQuery("SELECT * FROM department", function (err, res) {
+        if (err) throw err;
+        console.table(results);
+        startMenu();
+    });
+}
+//add view roles function
+function viewrole() {
+    Connection.createQuery("SELECT * FROM role", function (err, res) {
+        if (err) throw err;
+        console.table(results);
+        startMenu();
+    });
+}
+
+//View employees function
+function viewemployee() {
+    connection.query(`SELECT department.name, role.title, role.salary, employee.first_name, employee.last_name, employee.manager_id as manager
+FROM employee
+LEFT JOIN role ON employee.role_id = role.id
+LEFT JOIN department ON role.department_id = department.id
+LEFT JOIN employee manager on manager.id = employee.manager_id;`, function (err, res) {
+    if (err) throw err;
+    console.table(results);
+    startMenu();
+});
+}
 
 
 
