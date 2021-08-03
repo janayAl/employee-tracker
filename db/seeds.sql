@@ -1,16 +1,17 @@
-INSERT INTO department (id, name)
-VALUES (1, 'Air'),
-       (2, 'Water'),
-       (3, 'Earth');
+USE employees_db;
+INSERT INTO department (name)
+VALUES ('Air'),
+       ('Water'),
+       ('Earth');
 
-       INSERT INTO role (role_id, title, salary)
-VALUES (1, 'Bird', '$500,000',),
-       (2, 'Fish', '$250,000'),
-       (3, 'Deer', '100,000');
+       INSERT INTO role (title, salary)
+VALUES ('Bird', '500000'),
+       ('Fish', '50000'),
+       ('Deer', '100000');
        
 
-       INSERT INTO employee (employee_id, first_name, last_name, manager_id)
-VALUES (1, 'Scuttle', 'Shores', 1),
-       (2, 'Flounder','Dunger', 2 ),
-       (3, 'Bambi', 'Bloom', 3);
+       INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ('Scuttle', 'Shores', 1, 1),
+       ('Flounder','Dunger', 2, 2 ),
+       ('Bambi', 'Bloom', 3, 3);
     
