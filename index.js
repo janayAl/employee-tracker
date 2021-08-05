@@ -42,8 +42,9 @@ function initialQuestions() {
                     break;
                 case 'update an employee role':
                     UpdateEmployeeRole(); // update employee function call
-                    break;
-//exit or come back to initial questions? //
+                    break; //if I don't have the word break here, then it will go on to the next case or will it go back to the top?
+//exit (connection.end) or come back to initial questions? //
+//or delete beak at the end to add deault: console log('choose another option')
             }
         })
     
