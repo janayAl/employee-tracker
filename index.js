@@ -31,6 +31,7 @@ require('dotenv').config()
 const db = mysql.createConnection(
     {
       host: 'localhost',
+      port: 3306,
       user: 'root',
       password: process.env.DB_PASSWORD, 
       database: 'employees_db'
@@ -52,7 +53,7 @@ function initialQuestions() {
             type: 'list',
             name: 'ViewOptions',
             message: 'What would you like to do?',
-            Choices: ['view all departments', 
+            choices: ['view all departments', 
             'view all roles', 
             'view all employees', 
             'add a department', 
@@ -86,7 +87,7 @@ function initialQuestions() {
                     UpdateEmployeeRole(); // update employee function call
                     break;
                 case "Exit":
-                    exit(connetion.end);
+                    exit(db.end);
                     break;
 
                 //if I don't have the word break here, then it will go on to the next case or will it go back to the top?
@@ -130,30 +131,25 @@ LEFT JOIN employee manager on manager.id = employee.manager_id;`, function (err,
     )
 };
 
-     
-
-
-
 // function AddEmployee(employee)
 //    db.query(`SELECT * FROM employee`, function (err, results){
 //             console.table(results);
   
-   
-  
 
 const updateEmployeeRole = async () => {
   // get employees and choice one
-  const employee = await connection.query('SELECT * FROM employee');
+  const employee = await db.query('SELECT * FROM employee');
   console.log({ employee });
-  const employee = await inquirer.prompt([
+  const employeeQuestion = await inquirer.prompt([
     {
       type: 'list',
       message: "Which employee role would you like to update?",
       name: 'selectedValue',
-      choices: employee.map(
-        employee =>
-          `${employee.id} ${employee.first_name} ${employee.last_name}`,
-      ),
+      // choices: employee.map(
+      //   employee =>
+      //     `${employee.id} ${employee.first_name} ${employee.last_name}`,
+      // ),
+      choices: ["a", "b"]
     },
   ]);
   console.log({ employee });
