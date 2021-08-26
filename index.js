@@ -179,13 +179,13 @@ const updateEmployeeRole = async () => {
   return Promise.resolve();
 };
 
-updateEmployeeRole()
-  .then(() => {
-    console.log('updateEmployeeRole() is Done. Now will run start()');
-    start();
-  })
-  .catch(err => {
-    console.error('Something Error ', { err });
-  });
+// updateEmployeeRole()
+//   .then(() => {
+//     console.log('updateEmployeeRole() is Done. Now will run start()');
+//     start();
+//   })
+//   .catch(err => {
+//     console.error('Something Error ', { err });
+//   });
 
 
