@@ -4,6 +4,7 @@ const mysql2 = require('mysql2')
 // const Connection = require('mysql2/typings/mysql/lib/Connection')
 const inquirer = require('inquirer')
 require('dotenv').config()
+const cTable = require('console.table'); // npm package, writes the table in the view of the console
 
 
 
