@@ -9,7 +9,7 @@ const cTable = require('console.table'); // npm package, writes the table in the
 
 
 // const sequlize = require('sequlize')
-  //enable acces to .env variables
+//enable acces to .env variables
 
 // use environment variables to connect to database
 // const sequlize = new sequlize
@@ -31,36 +31,36 @@ const cTable = require('console.table'); // npm package, writes the table in the
 
 const db = mysql.createConnection(
     {
-      host: 'localhost',
-      port: 3306,
-      user: 'root',
-      password: process.env.DB_PASSWORD, 
-      database: 'employees_db'
+        host: 'localhost',
+        port: 3306,
+        user: 'root',
+        password: process.env.DB_PASSWORD,
+        database: 'employees_db'
     },
     console.log(`Connected to the employees_db database.`)
-  );
-  
-  db.connect(err => {
-      if(err){
-          throw err
-      }
-      console.log('MySQL connected')
-  })
-  
-  
+);
+
+db.connect(err => {
+    if (err) {
+        throw err
+    }
+    console.log('MySQL connected')
+})
+
+
 function initialQuestions() {
     inquirer.prompt([
         {
             type: 'list',
             name: 'ViewOptions',
             message: 'What would you like to do?',
-            choices: ['view all departments', 
-            'view all roles', 
-            'view all employees', 
-            'add a department', 
-            'add a role', 
-            'add an employee', 
-            'update an employee role',],
+            choices: ['view all departments',
+                'view all roles',
+                'view all employees',
+                'add a department',
+                'add a role',
+                'add an employee',
+                'update an employee role',],
         },
 
     ])
@@ -101,7 +101,7 @@ function initialQuestions() {
 initialQuestions();
 //add view department function
 function viewDepartment() {
-    db.Query(`SELECT * FROM department`,
+    db.query(`SELECT * FROM department`,
         function (err, results) {
             if (err) throw err; // added if statement for throw error if an erorr
             console.table(results); //console.table displays tabular data as a table
@@ -111,7 +111,7 @@ function viewDepartment() {
 
 //add view roles function
 function ViewRole() {
-   db.Query(`SELECT * FROM role`, function (err, results) {
+    db.query(`SELECT * FROM role`, function (err, results) {
         if (err) throw err;
         console.table(results);
         initialQuestions();
@@ -120,7 +120,7 @@ function ViewRole() {
 
 //View employees function
 function ViewEmployee() {
-db.query(`SELECT department.name, role.title, role.salary, employee.first_name, employee.last_name, employee.manager_id as manager
+    db.query(`SELECT department.name, role.title, role.salary, employee.first_name, employee.last_name, employee.manager_id as manager
 FROM employee
 LEFT JOIN role ON employee.role_id = role.id
 LEFT JOIN department ON role.department_id = department.id
@@ -128,57 +128,76 @@ LEFT JOIN employee manager on manager.id = employee.manager_id;`, function (err,
         if (err) throw err;
         console.table(results);
         initialQuestions();
-}
+    }
     )
 };
 
-// function AddEmployee(employee)
-//    db.query(`SELECT * FROM employee`, function (err, results){
-//             console.table(results);
-  
+function AddEmployee(employee) {
+    db.query(`SELECT * FROM employee`, function (err, results) {
+        console.table(results);
+
+        inquire
+            .prompt([
+                {
+                    name: "roleId",
+                    type: "input",
+                    message: "Enter an id"
+                    // validate: (input) => {
+                    //     if (input) {
+                    //         return true;
+
+                    //     }else {
+                    //         return "invalid entry, try again.";
+                    //     }
+                    // }
+
+                }
+            ])
+    })
+}
 
 const updateEmployeeRole = async () => {
-  // get employees and choice one
-  const employee = await db.query('SELECT * FROM employee');
-  console.log({ employee });
-  const employeeQuestion = await inquirer.prompt([
-    {
-      type: 'list',
-      message: "Which employee role would you like to update?",
-      name: 'selectedValue',
-      // choices: employee.map(
-      //   employee =>
-      //     `${employee.id} ${employee.first_name} ${employee.last_name}`,
-      // ),
-      choices: ["a", "b"]
-    },
-  ]);
-  console.log({ employee });
-  const employeeId = employee.selectedValue.split(' ')[0];
+    // get employees and choice one
+    const employee = await db.query('SELECT * FROM employee');
+    console.log({ employee });
+    const employeeQuestion = await inquirer.prompt([
+        {
+            type: 'list',
+            message: "Which employee role would you like to update?",
+            name: 'selectedValue',
+            // choices: employee.map(
+            //   employee =>
+            //     `${employee.id} ${employee.first_name} ${employee.last_name}`,
+            // ),
+            choices: ["a", "b"]
+        },
+    ]);
+    console.log({ employee });
+    const employeeId = employee.selectedValue.split(' ')[0];
 
-  // get roles and choice one
-  const roles = await connection.query('SELECT * FROM role');
-  console.log({ roles });
-  const newRole = inquirer.prompt([
-    {
-      type: 'list',
-      message: "What is the employee new role?",
-      name: 'selectedValue',
-      choices: role.map(role => `${role.id} ${role.title}`),
-    },
-  ]);
-  console.log({ newRole });
-  const roleId = newRole.selectedValue.split(' ')[0];
+    // get roles and choice one
+    const roles = await connection.query('SELECT * FROM role');
+    console.log({ roles });
+    const newRole = inquirer.prompt([
+        {
+            type: 'list',
+            message: "What is the employee new role?",
+            name: 'selectedValue',
+            choices: role.map(role => `${role.id} ${role.title}`),
+        },
+    ]);
+    console.log({ newRole });
+    const roleId = newRole.selectedValue.split(' ')[0];
 
-  // update employee role
-  const updateResult = await connection.query(
-    'UPDATE employee SET role_id = ? WHERE id = ?',
-    [roleId, employeeId],
-  );
-  console.log({ updateResult });
+    // update employee role
+    const updateResult = await connection.query(
+        'UPDATE employee SET role_id = ? WHERE id = ?',
+        [roleId, employeeId],
+    );
+    console.log({ updateResult });
 
-  return Promise.resolve();
-};
+    return Promise.resolve();
+}
 
 // updateEmployeeRole()
 //   .then(() => {
