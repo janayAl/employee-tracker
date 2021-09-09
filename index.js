@@ -85,7 +85,7 @@ function initialQuestions() {
                     AddEmployee(); //add employee function call 
                     break;
                 case 'update an employee role':
-                    UpdateEmployeeRole(); // update employee function call
+                    updateEmployeeRole(); // update employee function call
                     break;
                 case "Exit":
                     exit(db.end);
@@ -134,25 +134,24 @@ LEFT JOIN employee manager on manager.id = employee.manager_id;`, function (err,
 
 function AddEmployee(employee) {
     db.query(`SELECT * FROM employee`, function (err, results) {
-        console.table(results);
+        // console.table(results);
 
-        inquire
-            .prompt([
-                {
-                    name: "roleId",
-                    type: "input",
-                    message: "Enter an id"
-                    // validate: (input) => {
-                    //     if (input) {
-                    //         return true;
+        inquire.prompt([
+            {
+                name: "employeeName",
+                type: "input",
+                message: "Enter employee's name"
+                // validate: (input) => {
+                //     if (input) {
+                //         return true;
 
-                    //     }else {
-                    //         return "invalid entry, try again.";
-                    //     }
-                    // }
+                //     }else {
+                //         return "invalid entry, try again.";
+                //     }
+                // }
 
-                }
-            ])
+            }
+        ])
     })
 }
 
@@ -178,6 +177,7 @@ const updateEmployeeRole = async () => {
     // get roles and choice one
     const roles = await connection.query('SELECT * FROM role');
     console.log({ roles });
+
     const newRole = inquirer.prompt([
         {
             type: 'list',
@@ -199,6 +199,57 @@ const updateEmployeeRole = async () => {
     return Promise.resolve();
 }
 
+//add a department function//
+function AddDepartment(employee) {
+    db.query(`SELECT * FROM department`, function (err, results) {
+        console.table(results);
+
+        inquire
+            .prompt([
+                {
+                    name: "departmentName",
+                    type: "input",
+                    message: "Enter department name"
+                    // validate: (input) => {
+                    //     if (input) {
+                    //         return true;
+
+                    //     }else {
+                    //         return "invalid entry, try again.";
+                    //     }
+                    // }
+
+                }
+            ])
+    })
+    // AddEmployee();
+}
+
+
+//add role function//
+function AddRole(employee) {
+    db.query(`SELECT * FROM role`, function (err, results) {
+        console.table(results);
+
+        inquire
+            .prompt([
+                {
+                    name: "roleName",
+                    type: "input",
+                    message: "Enter the name of the role" //needs to be choices?
+                    // validate: (input) => {
+                    //     if (input) {
+                    //         return true;
+
+                    //     }else {
+                    //         return "invalid entry, try again.";
+                    //     }
+                    // }
+
+                }
+            ])
+    })
+}
 // updateEmployeeRole()
 //   .then(() => {
 //     console.log('updateEmployeeRole() is Done. Now will run start()');
