@@ -81,7 +81,7 @@ function initialQuestions() {
                 case 'add a role':
                     AddRole(); //add role funciton call
                     break;
-                case 'add an emplyee':
+                case 'add an employee':
                     AddEmployee(); //add employee function call 
                     break;
                 case 'update an employee role':
@@ -138,19 +138,34 @@ function AddEmployee(employee) {
 
         inquire.prompt([
             {
-                name: "employeeName",
+                name: "firstName",
                 type: "input",
-                message: "Enter employee's name"
-                // validate: (input) => {
-                //     if (input) {
-                //         return true;
-
-                //     }else {
-                //         return "invalid entry, try again.";
-                //     }
-                // }
-
+                message: "Enter employee's  first name"
+            },
+            {
+                name: "lastName",
+                type: "input",
+                message: "Enter employee's  last name"
+            },
+            {
+                name: "role",
+                type: "list",
+                message: "Select a role",
+                choices: ["Bird", "Fish", "Deer"]
             }
+            // ]).then(function ()) {
+            //     connection.query()
+            // }
+            // initialQuestions();
+            // validate: (input) => {
+            //     if (input) {
+            //         return true;
+
+            //     }else {
+            //         return "invalid entry, try again.";
+            //     }
+            // }
+
         ])
     })
 }
@@ -204,7 +219,7 @@ function AddDepartment(employee) {
     db.query(`SELECT * FROM department`, function (err, results) {
         console.table(results);
 
-        inquire
+        inquirer
             .prompt([
                 {
                     name: "departmentName",
@@ -220,7 +235,14 @@ function AddDepartment(employee) {
                     // }
 
                 }
-            ])
+            ]).then(function (answer) {
+
+                db.query(`INSERT INTO department(name)VALUES(${answer.departmentName})`, function (err, results) {
+                    console.table(results);
+                })
+
+            })
+
     })
     // AddEmployee();
 }
