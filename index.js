@@ -236,16 +236,19 @@ function AddDepartment(employee) {
 
                 }
             ]).then(function (answer) {
+                db.query("INSERT INTO employee SET ?", answer.departmentName)
+                    .then(function (err, res) {
+                        console.table(res);
+                    })
 
-                db.query(`INSERT INTO department(name)VALUES(${answer.departmentName})`, function (err, results) {
-                    console.table(results);
-                })
-
+                // db.query(`INSERT INTO department(name)VALUES(${answer.departmentName})`, function (err, results) {
+                //     console.table(results);
             })
 
     })
-    // AddEmployee();
 }
+// AddEmployee();
+
 
 
 //add role function//
