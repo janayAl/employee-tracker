@@ -3,4 +3,4 @@ This assignment creates tables and joins them using mysql2. Using inquirer, the 
 
 Github Repository:https://github.com/janayAl/employee-tracker
 
-Video Demonstration: https://www.youtube.com/watch?v=UgnHEordE_s
+Video Demonstration: https://youtu.be/5QMm0cI7m-s
