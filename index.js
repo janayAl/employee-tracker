@@ -153,22 +153,17 @@ function AddEmployee(employee) {
                 message: "Select a role",
                 choices: ["Bird", "Fish", "Deer"]
             }
-            // ]).then(function ()) {
-            //     connection.query()
-            // }
-            // initialQuestions();
-            // validate: (input) => {
-            //     if (input) {
-            //         return true;
+        ]).then(function (answer) {
+            db.query("INSERT INTO department SET ?", { name: answer.firstName, name: answer.lastName },)
+            function (err) {
+                if (err) throw err; {
+                    console.table("Inserted employee successfully!");
+                })
+    });
+})
 
-            //     }else {
-            //         return "invalid entry, try again.";
-            //     }
-            // }
 
-        ])
-    })
-}
+
 
 const updateEmployeeRole = async () => {
     // get employees and choice one
@@ -225,28 +220,19 @@ function AddDepartment(employee) {
                     name: "departmentName",
                     type: "input",
                     message: "Enter department name"
-                    // validate: (input) => {
-                    //     if (input) {
-                    //         return true;
 
-                    //     }else {
-                    //         return "invalid entry, try again.";
-                    //     }
-                    // }
-
-                }
+                } //insert into department set or employee set?//
             ]).then(function (answer) {
-                db.query("INSERT INTO employee SET ?", answer.departmentName)
-                    .then(function (err, res) {
-                        console.table(res);
+                db.query("INSERT INTO department SET ?", { name: answer.departmentName },
+                    function (err) {
+                        if (err) throw err;
+                        console.table("Inserted data successfully!"); // use console.table so data will show in lieu of console.log
                     })
-
-                // db.query(`INSERT INTO department(name)VALUES(${answer.departmentName})`, function (err, results) {
-                //     console.table(results);
             })
 
     })
 }
+// initialQuestions();
 // AddEmployee();
 
 
